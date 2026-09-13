@@ -8,52 +8,9 @@
   <title>KASIRAPP</title>
   
   <link rel="icon" href="https://myhartono.com/en/gm-label-small-117-kasir-kasir/?srsltid=AfmBOorSNO90MnZtwak3JAgFAEb4_oY-QXBkb_eOCC4uwfDWWknXe9Aq" />
-
-  <script>
-    // Membangun Manifest PWA yang Super Lengkap agar skor PWABuilder Hijau (Maksimal)
-    const manifestJSON = {
-      "name": "Aplikasi Konter & Servis",
-      "short_name": "KasirApp",
-      "description": "Sistem Kasir POS dan Manajemen Servis Konter HP Profesional yang dilengkapi pencetakan struk thermal bluetooth.",
-      "start_url": "/",
-      "display": "standalone",
-      "orientation": "portrait",
-      "background_color": "#eeeeee",
-      "theme_color": "#1d4ed8",
-      "lang": "id-ID",
-      "dir": "ltr",
-      "categories": ["business", "productivity", "utilities"],
-      "icons": [
-        { 
-          "src": "https://cdn-icons-png.flaticon.com/512/3014/3014283.png", 
-          "sizes": "192x192", 
-          "type": "image/png",
-          "purpose": "any"
-        },
-        { 
-          "src": "https://cdn-icons-png.flaticon.com/512/3014/3014283.png", 
-          "sizes": "512x512", 
-          "type": "image/png",
-          "purpose": "maskable"
-        }
-      ],
-      "shortcuts": [
-        {
-          "name": "Buka Kasir",
-          "short_name": "Kasir",
-          "description": "Buka layar transaksi kasir",
-          "url": "/",
-          "icons": [{ "src": "https://cdn-icons-png.flaticon.com/512/3014/3014283.png", "sizes": "192x192" }]
-        }
-      ],
-      "related_applications": [],
-      "prefer_related_applications": false
-    };
-    
-    // Menyuntikkan manifest ke dalam sistem HTML
-    const manifestURL = URL.createObjectURL(new Blob([JSON.stringify(manifestJSON)], { type: 'application/json' }));
-    document.head.insertAdjacentHTML('beforeend', `<link rel="manifest" href="${manifestURL}">`);
-  </script>
+  
+  <!-- KUNCI PERBAIKAN: Memanggil file manifest.json fisik, bukan script inline -->
+  <link rel="manifest" href="manifest.json" />
 
   <style>
     html, body {
