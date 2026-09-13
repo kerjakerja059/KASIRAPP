@@ -2,23 +2,49 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta name="theme-color" content="#1d4ed8" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <title>KASIRAPP</title>
-  <link rel="icon" href="https://myhartono.com/en/gm-label-small-117-kasir-kasir/?srsltid=AfmBOorSNO90MnZtwak3JAgFAEb4_oY-QXBkb_eOCC4uwfDWWknXe9Aq" />
+  
+  <!-- Ikon aplikasi yang lebih stabil (Bisa Anda ganti nanti) -->
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3014/3014283.png" />
+
+  <script>
+    // Membuat file manifest.json secara virtual agar dikenali sebagai Aplikasi (PWA)
+    const manifestJSON = {
+      "name": "Aplikasi Konter & Servis",
+      "short_name": "KasirApp",
+      "start_url": ".",
+      "display": "standalone",
+      "background_color": "#ffffff",
+      "theme_color": "#1d4ed8",
+      "icons": [{ 
+          "src": "https://cdn-icons-png.flaticon.com/512/3014/3014283.png", 
+          "sizes": "512x512", 
+          "type": "image/png" 
+      }]
+    };
+    const manifestURL = URL.createObjectURL(new Blob([JSON.stringify(manifestJSON)], { type: 'application/json' }));
+    document.head.insertAdjacentHTML('beforeend', `<link rel="manifest" href="${manifestURL}">`);
+  </script>
+
   <style>
     html, body {
       margin: 0;
       padding: 0;
       width: 100%;
       height: 100%;
-      background-color: #eee;
+      background-color: #f3f4f6; /* Warna abu-abu senada dengan tema aplikasi */
       overflow: hidden; /* Mencegah scroll ganda */
     }
 
     .iframe-container {
       width: 100%;
-      height: 100dvh; /* Menggunakan dvh agar pas di mobile browser */
+      height: 100dvh; /* dvh sangat optimal untuk mobile browser */
       overflow: hidden;
+      position: relative;
     }
 
     iframe {
@@ -26,11 +52,29 @@
       width: 100%;
       height: 100%;
       border: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    
+    /* Loader animasi saat iframe sedang dimuat */
+    .loading-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: sans-serif;
+      color: #6b7280;
+      font-weight: bold;
+      z-index: -1;
     }
   </style>
 </head>
 <body>
   <div class="iframe-container">
+    <div class="loading-text">Memuat Aplikasi...</div>
+    
+    <!-- PERHATIKAN ATRIBUT 'allow': Akses bluetooth WAJIB dimasukkan ke sini! -->
     <iframe
       id="app"
       src="https://script.google.com/macros/s/AKfycbwyLbVTHCjt_vV1AsPzmkSz6KCayHdYFlQuoVrLMkOeSWlqa9xhe6PwZZ7A96UwJkV5_Q/exec"
@@ -38,7 +82,7 @@
       allowfullscreen="true"
       webkitallowfullscreen="true"
       mozallowfullscreen="true"
-      allow="fullscreen; camera; microphone; display-capture; geolocation;">
+      allow="bluetooth; fullscreen; camera; microphone; display-capture; geolocation;">
     </iframe>
   </div>
 </body>
